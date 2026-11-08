@@ -1,11 +1,7 @@
 ﻿namespace BookCatalogAPI.Models
 {
-    public class Book
+    public record Book(int Id, string Title, string? Author, int Year, DateTime CreatedAt)
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string? Author { get; set; }
-        public int Year { get; set; }
-        public DateTime CreatedAt { get; set; }
+        
     }
 }
