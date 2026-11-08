@@ -1,4 +1,5 @@
 
+using ASPNET_Practice.Middlewares;
 using ASPNET_Practice.Services;
 using System.Text.Json.Serialization;
 
@@ -14,10 +15,13 @@ namespace ASPNET_Practice
                 .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
             builder.Services.AddOpenApi();
             builder.Services.AddSingleton<ICarService, CarService>();
+            builder.Services.AddProblemDetails();
+
             var app = builder.Build();
 
+            app.UseExceptionHandler();
+            app.UseMiddleware<RequestTimingMiddleware>();
             app.MapControllers();
-
             app.Run();
         }
     }
