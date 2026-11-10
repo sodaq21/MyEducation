@@ -15,6 +15,7 @@ namespace BookCatalogAPI
             builder.Services.AddOpenApi();
             builder.Services.AddSingleton<IBookService, BookService>();
             builder.Services.AddValidatorsFromAssemblyContaining<CreateBookRequestValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<UpdateTitleRequestValidator>();
 
             var app = builder.Build();
             

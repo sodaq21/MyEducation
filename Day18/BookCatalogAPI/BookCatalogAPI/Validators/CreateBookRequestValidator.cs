@@ -1,6 +1,5 @@
 ﻿using BookCatalogAPI.DTOs;
 using FluentValidation;
-using FluentValidation.Validators;
 
 namespace BookCatalogAPI.Validators
 {
