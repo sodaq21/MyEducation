@@ -13,7 +13,7 @@ namespace BookCatalogAPI.Validators
                 .MaximumLength(50).WithMessage("Title must not exceed 50 characters.");
                 
             RuleFor(x => x.author)
-                .MaximumLength(50).WithMessage("Title must not exceed 50 characters.");
+                .MaximumLength(50).WithMessage("Author must not exceed 50 characters.");
 
             RuleFor(x => x.year)
                 .NotEmpty().WithMessage("Year is required.")
