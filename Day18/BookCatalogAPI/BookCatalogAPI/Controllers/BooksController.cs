@@ -15,18 +15,21 @@ namespace BookCatalogAPI.Controllers
         private readonly IValidator<CreateBookRequest> _createBookValidator;
         private readonly IValidator<UpdateTitleRequest> _updateTitleValidator;
         private readonly IValidator<UpdateAuthorRequest> _updateAuthorValidator;
+        private readonly IValidator<UpdateYearRequest> _updateYearValidator;
 
         public BooksController(
             IBookService service, 
             IValidator<CreateBookRequest> createBookValidator, 
             IValidator<UpdateTitleRequest> updateTitleValidator,
-            IValidator<UpdateAuthorRequest> updateAuthorValidator
+            IValidator<UpdateAuthorRequest> updateAuthorValidator,
+            IValidator<UpdateYearRequest> updateYearValidator
             )
         {
             _service = service;
             _createBookValidator = createBookValidator;
             _updateTitleValidator = updateTitleValidator;
             _updateAuthorValidator = updateAuthorValidator;
+            _updateYearValidator = updateYearValidator;
         }
 
         [HttpGet]
@@ -97,5 +100,19 @@ namespace BookCatalogAPI.Controllers
             return Ok(BookResponse.FromBook(book));
         }
 
+        [HttpPatch("{id:int}/year")]
+        public async Task<ActionResult<BookResponse?>> UpdateYear([FromRoute] int id, [FromBody] UpdateYearRequest request)
+        {
+            var res = await _updateYearValidator.ValidateAsync(request);
+            if (!res.IsValid)
+                return BadRequest(res.Errors);
+
+            var book = await _service.UpdateYearAsync(id, request.year);
+
+            if (book is null)
+                return NotFound();
+
+            return Ok(BookResponse.FromBook(book));
+        }
     }
 }

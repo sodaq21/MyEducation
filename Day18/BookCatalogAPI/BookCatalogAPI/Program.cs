@@ -17,6 +17,7 @@ namespace BookCatalogAPI
             builder.Services.AddValidatorsFromAssemblyContaining<CreateBookRequestValidator>();
             builder.Services.AddValidatorsFromAssemblyContaining<UpdateTitleRequestValidator>();
             builder.Services.AddValidatorsFromAssemblyContaining<UpdateAuthorRequestValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<UpdateYearRequestValidator>();
 
             var app = builder.Build();
             
