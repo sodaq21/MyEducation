@@ -1,4 +1,6 @@
 
+using BookCatalogAPI.Services;
+
 namespace BookCatalogAPI
 {
     public class Program
@@ -9,6 +11,7 @@ namespace BookCatalogAPI
 
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
+            builder.Services.AddSingleton<IBookService, BookService>();
 
             var app = builder.Build();
 
