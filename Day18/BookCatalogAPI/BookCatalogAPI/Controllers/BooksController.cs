@@ -27,7 +27,7 @@ namespace BookCatalogAPI.Controllers
             return Ok(books.Select(BookResponse.FromBook));
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<BookResponse?>> GetById([FromRoute] int id)
         {
             var book = await _service.GetByIdAsync(id);
@@ -46,6 +46,16 @@ namespace BookCatalogAPI.Controllers
 
             var book = await _service.CreateAsync(request.title, request.author, request.year);
             return CreatedAtAction(nameof(GetById), new { id = book.Id }, BookResponse.FromBook(book));
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            bool res = await _service.DeleteAsync(id);
+            if (!res)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }
