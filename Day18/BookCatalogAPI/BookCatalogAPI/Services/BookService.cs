@@ -48,19 +48,43 @@ namespace BookCatalogAPI.Services
             }
         }
 
-        public Task<Book> UpdateAuthorAsync(int id, string? author)
+        public Task<Book?> UpdateAuthorAsync(int id, string? author)
         {
-            throw new NotImplementedException();
+            lock (_lock)
+            {
+                int index = _books.FindIndex(x => x.Id == id);
+                if (index < 0)
+                    return Task.FromResult<Book?>(null);
+
+                _books[index] = _books[index] with { Author = author };
+                return Task.FromResult<Book?>(_books[index]);
+            }
         }
 
-        public Task<Book> UpdateTitleAsync(int id, string title)
+        public Task<Book?> UpdateTitleAsync(int id, string title)
         {
-            throw new NotImplementedException();
+            lock (_lock)
+            {
+                int index = _books.FindIndex(x => x.Id == id);
+                if (index < 0)
+                    return Task.FromResult<Book?>(null);
+
+                _books[index] = _books[index] with { Title = title};
+                return Task.FromResult<Book?>(_books[index]);
+            }
         }
 
-        public Task<Book> UpdateYearAsync(int id, int year)
+        public Task<Book?> UpdateYearAsync(int id, int year)
         {
-            throw new NotImplementedException();
+            lock (_lock)
+            {
+                int index = _books.FindIndex(x => x.Id == id);
+                if (index < 0)
+                    return Task.FromResult<Book?>(null);
+
+                _books[index] = _books[index] with { Year = year };
+                return Task.FromResult<Book?>(_books[index]);
+            }
         }
     }
 }

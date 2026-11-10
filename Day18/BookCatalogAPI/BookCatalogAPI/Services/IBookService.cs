@@ -9,8 +9,8 @@ namespace BookCatalogAPI.Services
         Task<IReadOnlyList<Book>> GetAllAsync(string? author);
         Task<Book> CreateAsync(string title, string? author, int year);
         Task<bool> DeleteAsync(int id);
-        Task<Book> UpdateTitleAsync(int id, string title);
-        Task<Book> UpdateAuthorAsync(int id, string? author);
-        Task<Book> UpdateYearAsync(int id, int year);
+        Task<Book?> UpdateTitleAsync(int id, string title);
+        Task<Book?> UpdateAuthorAsync(int id, string? author);
+        Task<Book?> UpdateYearAsync(int id, int year);
     }
 }
