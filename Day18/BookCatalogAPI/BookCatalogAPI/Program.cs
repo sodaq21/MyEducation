@@ -1,5 +1,7 @@
 
 using BookCatalogAPI.Services;
+using BookCatalogAPI.Validators;
+using FluentValidation;
 
 namespace BookCatalogAPI
 {
@@ -12,9 +14,10 @@ namespace BookCatalogAPI
             builder.Services.AddControllers();
             builder.Services.AddOpenApi();
             builder.Services.AddSingleton<IBookService, BookService>();
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateBookRequestValidator>();
 
             var app = builder.Build();
-
+            
             app.MapControllers();
 
             app.Run();

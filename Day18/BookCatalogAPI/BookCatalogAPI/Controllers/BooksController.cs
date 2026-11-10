@@ -1,6 +1,8 @@
 ﻿using BookCatalogAPI.DTOs;
 using BookCatalogAPI.Models;
 using BookCatalogAPI.Services;
+using BookCatalogAPI.Validators;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCatalogAPI.Controllers
@@ -10,10 +12,12 @@ namespace BookCatalogAPI.Controllers
     public class BooksController : ControllerBase
     {
         private readonly IBookService _service;
+        private readonly IValidator<CreateBookRequest> _validator;
 
-        public BooksController(IBookService service)
+        public BooksController(IBookService service, IValidator<CreateBookRequest> validator)
         {
             _service = service;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -33,10 +37,15 @@ namespace BookCatalogAPI.Controllers
             return Ok(BookResponse.FromBook(book));
         }
 
-        //[HttpPost]
-        //public async Task<ActionResult<BookResponse>> Create(CreateBookRequest request)
-        //{
+        [HttpPost]
+        public async Task<ActionResult<BookResponse>> Create(CreateBookRequest request)
+        {
+            var result = await _validator.ValidateAsync(request);
+            if (!result.IsValid)
+                return BadRequest(result.Errors);
 
-        //}
+            var book = await _service.CreateAsync(request.title, request.author, request.year);
+            return CreatedAtAction(nameof(GetById), new { id = book.Id }, BookResponse.FromBook(book));
+        }
     }
 }
