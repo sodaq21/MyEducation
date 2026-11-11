@@ -7,7 +7,7 @@ namespace BookCatalogAPI.Validators
     {
         public UpdateTitleRequestValidator()
         {
-            RuleFor(x => x.title)
+            RuleFor(x => x.Title)
                 .NotEmpty().WithMessage("Title is required.")
                 .MaximumLength(50).WithMessage("Title must not exceed 50 characters");
                 

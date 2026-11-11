@@ -7,7 +7,7 @@ namespace BookCatalogAPI.Validators
     {
         public UpdateYearRequestValidator()
         {
-            RuleFor(x => x.year)
+            RuleFor(x => x.Year)
                 .NotEmpty().WithMessage("Year is required.")
                 .InclusiveBetween(1, DateTime.UtcNow.Year).WithMessage("An invalid year was entered.");
         }

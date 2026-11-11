@@ -75,7 +75,7 @@ namespace BookCatalogAPI.Controllers
             if (!res.IsValid)
                 return ValidationProblem(new ValidationProblemDetails(res.ToDictionary()));
 
-            var book = await _service.UpdateTitleAsync(id, request.title);
+            var book = await _service.UpdateTitleAsync(id, request.Title);
 
             if (book is null)
                 return NotFound();
@@ -90,7 +90,7 @@ namespace BookCatalogAPI.Controllers
             if (!res.IsValid)
                 return ValidationProblem(new ValidationProblemDetails(res.ToDictionary()));
 
-            var book = await _service.UpdateAuthorAsync(id, request.author);
+            var book = await _service.UpdateAuthorAsync(id, request.Author);
 
             if (book is null)
                 return NotFound();
@@ -105,7 +105,7 @@ namespace BookCatalogAPI.Controllers
             if (!res.IsValid)
                 return ValidationProblem(new ValidationProblemDetails(res.ToDictionary()));
 
-            var book = await _service.UpdateYearAsync(id, request.year);
+            var book = await _service.UpdateYearAsync(id, request.Year);
 
             if (book is null)
                 return NotFound();

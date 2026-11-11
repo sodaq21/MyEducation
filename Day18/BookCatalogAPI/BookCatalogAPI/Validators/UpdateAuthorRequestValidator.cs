@@ -7,7 +7,7 @@ namespace BookCatalogAPI.Validators
     {
         public UpdateAuthorRequestValidator()
         {
-            RuleFor(x => x.author)
+            RuleFor(x => x.Author)
                 .MaximumLength(50).WithMessage("Author must not exceed 50 characters.");
         }
     }
