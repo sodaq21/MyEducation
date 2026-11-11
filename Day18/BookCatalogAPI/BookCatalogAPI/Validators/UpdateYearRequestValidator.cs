@@ -9,7 +9,7 @@ namespace BookCatalogAPI.Validators
         {
             RuleFor(x => x.year)
                 .NotEmpty().WithMessage("Year is required.")
-                .InclusiveBetween(1, DateTime.Now.Year).WithMessage("An invalid year was entered.");
+                .InclusiveBetween(1, DateTime.UtcNow.Year).WithMessage("An invalid year was entered.");
         }
     }
 }
