@@ -1,4 +1,3 @@
-
 using BookCatalogAPI.Services;
 using BookCatalogAPI.Validators;
 using FluentValidation;

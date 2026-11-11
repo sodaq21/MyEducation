@@ -1,5 +1,4 @@
-﻿using BookCatalogAPI.DTOs;
-using BookCatalogAPI.Models;
+﻿using BookCatalogAPI.Models;
 
 namespace BookCatalogAPI.Services
 {

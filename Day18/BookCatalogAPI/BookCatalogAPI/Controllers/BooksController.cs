@@ -1,9 +1,6 @@
 ﻿using BookCatalogAPI.DTOs;
-using BookCatalogAPI.Models;
 using BookCatalogAPI.Services;
-using BookCatalogAPI.Validators;
 using FluentValidation;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCatalogAPI.Controllers
