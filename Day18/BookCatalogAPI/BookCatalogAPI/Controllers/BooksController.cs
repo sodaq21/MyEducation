@@ -38,7 +38,7 @@ namespace BookCatalogAPI.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<BookResponse?>> GetById([FromRoute] int id)
+        public async Task<ActionResult<BookResponse>> GetById([FromRoute] int id)
         {
             var book = await _service.GetByIdAsync(id);
             if (book is null)
@@ -54,7 +54,7 @@ namespace BookCatalogAPI.Controllers
             if (!result.IsValid)
                 return ValidationProblem(new ValidationProblemDetails(result.ToDictionary()));
 
-            var book = await _service.CreateAsync(request.title, request.author, request.year);
+            var book = await _service.CreateAsync(request.Title, request.Author, request.Year);
             return CreatedAtAction(nameof(GetById), new { id = book.Id }, BookResponse.FromBook(book));
         }
 
@@ -69,7 +69,7 @@ namespace BookCatalogAPI.Controllers
         }
 
         [HttpPatch("{id:int}/title")]
-        public async Task<ActionResult<BookResponse?>> UpdateTitle([FromRoute] int id, [FromBody] UpdateTitleRequest request)
+        public async Task<ActionResult<BookResponse>> UpdateTitle([FromRoute] int id, [FromBody] UpdateTitleRequest request)
         {
             var res = await _updateTitleValidator.ValidateAsync(request);
             if (!res.IsValid)
@@ -84,7 +84,7 @@ namespace BookCatalogAPI.Controllers
         }
 
         [HttpPatch("{id:int}/author")]
-        public async Task<ActionResult<BookResponse?>> UpdateAuthor([FromRoute] int id, [FromBody] UpdateAuthorRequest request)
+        public async Task<ActionResult<BookResponse>> UpdateAuthor([FromRoute] int id, [FromBody] UpdateAuthorRequest request)
         {
             var res = await _updateAuthorValidator.ValidateAsync(request);
             if (!res.IsValid)
@@ -99,7 +99,7 @@ namespace BookCatalogAPI.Controllers
         }
 
         [HttpPatch("{id:int}/year")]
-        public async Task<ActionResult<BookResponse?>> UpdateYear([FromRoute] int id, [FromBody] UpdateYearRequest request)
+        public async Task<ActionResult<BookResponse>> UpdateYear([FromRoute] int id, [FromBody] UpdateYearRequest request)
         {
             var res = await _updateYearValidator.ValidateAsync(request);
             if (!res.IsValid)

@@ -1,6 +1,6 @@
 ﻿namespace BookCatalogAPI.DTOs
 {
-    public record CreateBookRequest(string title, string? author, int year)
+    public record CreateBookRequest(string Title, string? Author, int Year)
     {
     }
 }

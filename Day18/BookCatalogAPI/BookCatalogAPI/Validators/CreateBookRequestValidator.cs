@@ -7,14 +7,14 @@ namespace BookCatalogAPI.Validators
     {
         public CreateBookRequestValidator()
         {
-            RuleFor(x => x.title)
+            RuleFor(x => x.Title)
                 .NotEmpty().WithMessage("Title is required.")
                 .MaximumLength(50).WithMessage("Title must not exceed 50 characters.");
                 
-            RuleFor(x => x.author)
+            RuleFor(x => x.Author)
                 .MaximumLength(50).WithMessage("Author must not exceed 50 characters.");
 
-            RuleFor(x => x.year)
+            RuleFor(x => x.Year)
                 .NotEmpty().WithMessage("Year is required.")
                 .InclusiveBetween(1, DateTime.UtcNow.Year).WithMessage("An invalid year was entered.");
         }

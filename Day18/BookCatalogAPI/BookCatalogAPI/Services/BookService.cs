@@ -12,16 +12,16 @@ namespace BookCatalogAPI.Services
         public BookService()
         {
             _books = [
-                new Book(_id++, "1984", "George Orwell", 1949, DateTime.Now),
-                new Book(_id++, "Преступление и наказание", "Фёдор Достоевский", 1866, DateTime.Now),
-                new Book(_id++, "Мастер и Маргарита", "Михаил Булгаков", 1967, DateTime.Now),
-                new Book(_id++, "Война и мир", "Лев Толстой", 1869, DateTime.Now),
-                new Book(_id++, "Гарри Поттер и философский камень", "Джоан Роулинг", 1997, DateTime.Now),
-                new Book(_id++, "Три товарища", "Эрих Мария Ремарк", 1936, DateTime.Now),
-                new Book(_id++, "Цветы для Элджернона", "Дэниел Киз", 1966, DateTime.Now),
-                new Book(_id++, "Шерлок Холмс: Собака Баскервилей", "Артур Конан Дойл", 1902, DateTime.Now),
-                new Book(_id++, "Маленький принц", "Антуан де Сент-Экзюпери", 1943, DateTime.Now),
-                new Book(_id++,  "Чистый код", "Роберт Мартин", 2008, DateTime.Now)
+                new Book(_id++, "1984", "George Orwell", 1949, DateTime.UtcNow),
+                new Book(_id++, "Преступление и наказание", "Фёдор Достоевский", 1866, DateTime.UtcNow),
+                new Book(_id++, "Мастер и Маргарита", "Михаил Булгаков", 1967, DateTime.UtcNow),
+                new Book(_id++, "Война и мир", "Лев Толстой", 1869, DateTime.UtcNow),
+                new Book(_id++, "Гарри Поттер и философский камень", "Джоан Роулинг", 1997, DateTime.UtcNow),
+                new Book(_id++, "Три товарища", "Эрих Мария Ремарк", 1936, DateTime.UtcNow),
+                new Book(_id++, "Цветы для Элджернона", "Дэниел Киз", 1966, DateTime.UtcNow),
+                new Book(_id++, "Шерлок Холмс: Собака Баскервилей", "Артур Конан Дойл", 1902, DateTime.UtcNow),
+                new Book(_id++, "Маленький принц", "Антуан де Сент-Экзюпери", 1943, DateTime.UtcNow),
+                new Book(_id++,  "Чистый код", "Роберт Мартин", 2008, DateTime.UtcNow)
             ];
         }
 
@@ -40,7 +40,7 @@ namespace BookCatalogAPI.Services
             {
                 IEnumerable<Book> query = _books;
                 if (author is not null)
-                    query = query.Where(x => x.Author == author).ToList();
+                    query = query.Where(x => x.Author == author);
 
                 var result = query.OrderBy(x => x.Id).ToList();
                 return Task.FromResult<IReadOnlyList<Book>>(result);

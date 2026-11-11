@@ -1,6 +1,6 @@
 ﻿namespace BookCatalogAPI.DTOs
 {
-    public record UpdateTitleRequest(string title)
+    public record UpdateTitleRequest(string Title)
     {
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace BookCatalogAPI.DTOs
 {
-    public record UpdateYearRequest(int year)
+    public record UpdateYearRequest(int Year)
     {
     }
 }
