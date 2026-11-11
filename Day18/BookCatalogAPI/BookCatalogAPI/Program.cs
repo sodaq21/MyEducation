@@ -15,15 +15,15 @@ namespace BookCatalogAPI
             builder.Services.AddOpenApi();
             builder.Services.AddSingleton<IBookService, BookService>();
             builder.Services.AddValidatorsFromAssemblyContaining<CreateBookRequestValidator>();
-            builder.Services.AddValidatorsFromAssemblyContaining<UpdateTitleRequestValidator>();
-            builder.Services.AddValidatorsFromAssemblyContaining<UpdateAuthorRequestValidator>();
-            builder.Services.AddValidatorsFromAssemblyContaining<UpdateYearRequestValidator>();
-            builder.Services.AddSwaggerGen();
 
+            builder.Services.AddSwaggerGen();
             var app = builder.Build();
 
-            app.UseSwagger();
-            app.UseSwaggerUI();
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseSwagger();
+                app.UseSwaggerUI();
+            }
 
             app.MapControllers();
 
