@@ -7,7 +7,7 @@ namespace BookCatalogAPI.Services
         private readonly List<Book> _books = [];
         
         private int _id = 1;
-        private object _lock = new();
+        private readonly object _lock = new();
 
         public BookService()
         {
@@ -40,7 +40,7 @@ namespace BookCatalogAPI.Services
             {
                 IEnumerable<Book> query = _books;
                 if (author is not null)
-                    query = query.Where(x => x.Author == author);
+                    query = query.Where(x => x.Author.ToLower() == author.ToLower());
 
                 var result = query.OrderBy(x => x.Id).ToList();
                 return Task.FromResult<IReadOnlyList<Book>>(result);
