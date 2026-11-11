@@ -3,6 +3,7 @@ using BookCatalogAPI.Models;
 using BookCatalogAPI.Services;
 using BookCatalogAPI.Validators;
 using FluentValidation;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookCatalogAPI.Controllers
@@ -54,7 +55,7 @@ namespace BookCatalogAPI.Controllers
         {
             var result = await _createBookValidator.ValidateAsync(request);
             if (!result.IsValid)
-                return BadRequest(result.Errors);
+                return ValidationProblem(new ValidationProblemDetails(result.ToDictionary()));
 
             var book = await _service.CreateAsync(request.title, request.author, request.year);
             return CreatedAtAction(nameof(GetById), new { id = book.Id }, BookResponse.FromBook(book));
@@ -75,7 +76,7 @@ namespace BookCatalogAPI.Controllers
         {
             var res = await _updateTitleValidator.ValidateAsync(request);
             if (!res.IsValid)
-                return BadRequest(res.Errors);
+                return ValidationProblem(new ValidationProblemDetails(res.ToDictionary()));
 
             var book = await _service.UpdateTitleAsync(id, request.title);
 
@@ -90,7 +91,7 @@ namespace BookCatalogAPI.Controllers
         {
             var res = await _updateAuthorValidator.ValidateAsync(request);
             if (!res.IsValid)
-                return BadRequest(res.Errors);
+                return ValidationProblem(new ValidationProblemDetails(res.ToDictionary()));
 
             var book = await _service.UpdateAuthorAsync(id, request.author);
 
@@ -105,7 +106,7 @@ namespace BookCatalogAPI.Controllers
         {
             var res = await _updateYearValidator.ValidateAsync(request);
             if (!res.IsValid)
-                return BadRequest(res.Errors);
+                return ValidationProblem(new ValidationProblemDetails(res.ToDictionary()));
 
             var book = await _service.UpdateYearAsync(id, request.year);
 
